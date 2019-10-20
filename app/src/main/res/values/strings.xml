@@ -1,3 +1,8 @@
 <resources>
+
     <string name="app_name">Mooncascade</string>
+    <string name="forecast_day">Day weather forecast: </string>
+    <string name="forecast_night">Night weather forecast: </string>
+    <string name="temp_range">Temperature range: </string>
+
 </resources>
