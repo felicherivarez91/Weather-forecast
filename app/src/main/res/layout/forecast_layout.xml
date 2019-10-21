@@ -2,8 +2,6 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,13 +9,13 @@
         android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/FloralWhite"
         android:layout_gravity="center"
         android:layout_margin="4dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/Seashell"
             android:padding="2dp">
 
             <TextView
@@ -26,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +35,8 @@
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
                 android:text="@string/forecast_day"
-                android:textSize="@dimen/text_size"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtdate" />
 
@@ -48,10 +46,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtdayforecast" />
+
+            <ImageView
+                android:id="@+id/imgday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size_top"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txttempmin"
@@ -59,7 +67,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtphenomenon" />
@@ -68,55 +75,128 @@
                 android:id="@+id/txttempmax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textSize="@dimen/text_size"
                 android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toEndOf="@+id/txttempmin"
-                app:layout_constraintTop_toBottomOf="@+id/txtphenomenon"/>
+                app:layout_constraintTop_toBottomOf="@+id/txtphenomenon" />
 
             <TextView
                 android:id="@+id/txttext"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txttempmin" />
 
             <TextView
                 android:id="@+id/txtpeipsi"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txttext" />
+
+            <TextView
+                android:id="@+id/txtsea"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtpeipsi" />
 
             <TextView
                 android:id="@+id/txtnightcaption"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
-                android:layout_marginTop="@dimen/margin_size_top"
-                android:textSize="@dimen/text_size"
+                android:layout_marginTop="@dimen/margin_size"
                 android:text="@string/forecast_night"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtpeipsi" />
+                app:layout_constraintTop_toBottomOf="@+id/txtsea" />
 
             <TextView
-                android:id="@+id/txtnighttext"
+                android:id="@+id/txtnightphenomenon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                android:text="TextView"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtnightcaption" />
+
+            <ImageView
+                android:id="@+id/imgnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtsea" />
+
+            <TextView
+                android:id="@+id/txtnighttempmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightphenomenon" />
+
+            <TextView
+                android:id="@+id/txtnighttempmax"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/txtnighttempmin"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightphenomenon" />
+
+            <TextView
+                android:id="@+id/txtnightsea"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnighttext" />
+
+            <TextView
+                android:id="@+id/txtnighttext"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnighttempmin" />
+
+            <TextView
+                android:id="@+id/txtnightpeipsi"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightsea" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
