@@ -8,7 +8,7 @@ import com.example.mooncascade.R
 import com.example.mooncascade.data.ForecastWeather
 import kotlinx.android.synthetic.main.forecast_layout.view.*
 
-class ForecastRecyclerView(private val forecastweather : ForecastWeather) :
+class ForecastRecyclerView(private val forecastweather: ForecastWeather) :
                                            RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -48,10 +48,17 @@ class ForecastRecyclerView(private val forecastweather : ForecastWeather) :
             "Variable clouds", "Cloudy with clear spells" ->
                                           holder.imgday.setImageResource(R.drawable.variable_clouds)
             "Cloudy" ->  holder.imgday.setImageResource(R.drawable.cloudy)
-            "Light rain" -> holder.imgday.setImageResource(R.drawable.light_rain)
-            "Moderate rain" , "Heavy rain" -> holder.imgday.setImageResource(R.drawable.moderate_rain)
+            "Light rain"-> holder.imgday.setImageResource(R.drawable.light_rain)
+            "Moderate rain" , "Heavy rain"
+                                         -> holder.imgday.setImageResource(R.drawable.moderate_rain)
             "Light snow shower" -> holder.imgday.setImageResource(R.drawable.light_snow_shower)
+            "Moderate snow shower" -> holder.imgday.setImageResource(R.drawable.moderate_snow)
+            "Light shower", "Moderate shower", "Heavy shower"
+                                          -> holder.imgday.setImageResource(R.drawable.light_shower)
             "Hail" -> holder.imgday.setImageResource(R.drawable.hail)
+            "Light sleet","Moderate sleet" -> holder.imgday.setImageResource(R.drawable.sleet)
+            "Mist" ->  holder.imgday.setImageResource(R.drawable.mist)
+            "Fog" ->  holder.imgday.setImageResource(R.drawable.fog)
             "Thunderstorm" -> holder.imgday.setImageResource(R.drawable.thunderstorm)
             "Thunder" ->  holder.imgday.setImageResource(R.drawable.thunder)
             else -> holder.imgday.setImageResource(R.drawable.noinfo)
@@ -63,13 +70,18 @@ class ForecastRecyclerView(private val forecastweather : ForecastWeather) :
             "Clear" -> holder.imgnight.setImageResource(R.drawable.cloudy_moon)
             "Few clouds" -> holder.imgnight.setImageResource(R.drawable.few_clouds)
             "Variable clouds", "Cloudy with clear spells" ->
-                holder.imgnight.setImageResource(R.drawable.variable_clouds)
+                holder.imgnight.setImageResource(R.drawable.night_variable_clouds)
             "Cloudy" ->  holder.imgnight.setImageResource(R.drawable.cloudy)
             "Light rain" -> holder.imgnight.setImageResource(R.drawable.light_rain)
-            "Moderate rain" -> holder.imgnight.setImageResource(R.drawable.moderate_rain)
-            "Heavy rain" -> holder.imgnight.setImageResource(R.drawable.night_rain)
+            "Moderate rain","Heavy rain" -> holder.imgnight.setImageResource(R.drawable.moderate_rain)
+            "Light shower" ->holder.imgnight.setImageResource(R.drawable.heavy_shower)
+            "Moderate shower","Heavy shower"-> holder.imgnight.setImageResource(R.drawable.night_shower)
             "Light snow shower" -> holder.imgnight.setImageResource(R.drawable.light_snow_shower)
+            "Moderate snow shower" -> holder.imgnight.setImageResource(R.drawable.moderate_snow)
+            "Light sleet","Moderate sleet" -> holder.imgnight.setImageResource(R.drawable.sleet)
             "Hail" -> holder.imgnight.setImageResource(R.drawable.hail)
+            "Mist" -> holder.imgnight.setImageResource(R.drawable.mist)
+            "Fog" -> holder.imgnight.setImageResource(R.drawable.fog)
             "Thunderstorm" -> holder.imgnight.setImageResource(R.drawable.thunderstorm)
             "Thunder" -> holder.imgnight.setImageResource(R.drawable.thunder)
             else -> holder.imgnight.setImageResource(R.drawable.noinfo)

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import com.example.mooncascade.di.component.AppComponent
 import com.example.mooncascade.di.component.DaggerAppComponent
+import com.example.mooncascade.di.modules.ContextModule
 
 class App : Application(){
 
@@ -12,7 +13,7 @@ class App : Application(){
     override fun onCreate() {
         super.onCreate()
         instance = this
-        component = DaggerAppComponent.builder().build()
+        component = DaggerAppComponent.builder().contextModule(ContextModule(this)).build()
         component.injectApp(this)
     }
 

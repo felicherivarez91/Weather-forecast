@@ -1,8 +1,17 @@
 package com.example.mooncascade.data
 
+import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
-data class ForecastWeather(@SerializedName("forecasts") val forecast: List<ForecastList>)
+const val WEATHER_LOCATION_ID = 0
+
+@Entity(tableName = "forecast")
+data class ForecastWeather(
+                           @SerializedName("forecasts") val forecast: List<ForecastList>
+                          ){
+    @PrimaryKey(autoGenerate = false)
+    var id: Int = WEATHER_LOCATION_ID
+}
 
 data class ForecastList(
                         @SerializedName("date") val mdate : String,
@@ -27,3 +36,5 @@ data class Night(
                  @SerializedName("peipsi") val mpeipsi : String,
                  @SerializedName("sea") val msea: String
                 )
+
+

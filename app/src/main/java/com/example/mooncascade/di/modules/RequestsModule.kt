@@ -41,7 +41,7 @@ class RequestsModule {
     @Singleton
     fun retrofit(
         okHttpClient: OkHttpClient, gsonConverterFactory: GsonConverterFactory,
-        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory, gson: Gson
+        rxJava2CallAdapterFactory: RxJava2CallAdapterFactory
     ): Retrofit {
         return Retrofit.Builder()
             .client(okHttpClient)
