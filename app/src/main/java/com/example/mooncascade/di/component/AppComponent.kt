@@ -6,6 +6,7 @@ import com.example.mooncascade.db.ForecastDataBase
 import com.example.mooncascade.di.modules.ContextModule
 import com.example.mooncascade.di.modules.ForecastDBModule
 import com.example.mooncascade.di.modules.RequestsModule
+import com.example.mooncascade.presenter.MainPresenter
 import dagger.Component
 import javax.inject.Singleton
 
@@ -16,6 +17,8 @@ interface AppComponent {
     val retrofitCall : RetrofitCall
 
     val forecastdatabase : ForecastDataBase
+
+    val mainpresenter : MainPresenter
 
     fun injectApp(myApplication: App)
 }
