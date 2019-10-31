@@ -9,7 +9,7 @@ import com.example.mooncascade.data.ForecastWeather
 
 import kotlinx.android.synthetic.main.cities_items_layout.view.*
 
-class CityRecyclerView(private val mweatherforecast : ForecastWeather) :
+class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcontext : MainActivity):
                                                RecyclerView.Adapter<CityRecyclerView.ViewHolder>() {
 
     private val currday : Int = 0
@@ -26,6 +26,7 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather) :
                                                                                         mplacesname}
             mtempmin.apply { text = mweatherforecast.forecast[currday].mday.mplaces[position].
                                                                                           mtempmin }
+            itemView.setOnClickListener { mcontext.onCityClicked()  }
         }
     }
 
@@ -35,4 +36,5 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather) :
         val mcityname = mView.txtcityname
         val mtempmin = mView.txtcitytempmin
     }
+
 }

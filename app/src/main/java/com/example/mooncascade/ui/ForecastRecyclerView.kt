@@ -41,7 +41,7 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
             txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
             txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi }
             txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea }
-            itemView.setOnClickListener {context.onItemClicked(forecastweather,position) }
+            itemView.setOnClickListener {context.onItemforecastClicked(forecastweather,position) }
         }
     }
 
@@ -113,12 +113,6 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
         val txtnighttext = view.txtnighttext
         val txtnightpeipsi = view.txtnightpeipsi
 
-    }
-
-
-
-    interface OnItemClickedListener{
-        fun onItemClicked(forecastweather: ForecastWeather, position: Int)
     }
 
 }
