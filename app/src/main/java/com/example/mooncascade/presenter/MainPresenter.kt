@@ -17,6 +17,7 @@ class MainPresenter: BasePresenter<MainActivity>{
 
     private lateinit var mainView: MainActivity
     private var disposable : Disposable? = null
+    private var mweatherforecast : ForecastWeather? = null
 
     override fun onAttach(view: MainActivity) {
         this.mainView = view
@@ -27,16 +28,30 @@ class MainPresenter: BasePresenter<MainActivity>{
         return cm.getActiveNetworkInfo()!= null
     }
 
-    override fun setData( forecast: Observable<ForecastWeather>) {
-        disposable = forecast.subscribeOn(Schedulers.newThread()).
-            observeOn(AndroidSchedulers.mainThread())
-            .subscribe {
-                        mainView.forecast_recyclerview.layoutManager =
-                                                                  LinearLayoutManager(this.mainView)
-                        mainView.forecast_recyclerview.adapter = ForecastRecyclerView(it)
-                        forecast.subscribeOn(Schedulers.newThread()).observeOn(Schedulers.io()).
-                         subscribe{ mainView.forecastDataBase.forecastdao().insert(it) }
-                        }
+    override fun loadDatafromInternet(forecast: Observable<ForecastWeather>) {
+        disposable = forecast
+                     .subscribeOn(Schedulers.newThread())
+                     .observeOn(Schedulers.io())
+                     .doOnTerminate { if (mweatherforecast != null)
+                                 mainView.forecastDataBase.forecastdao().insert(mweatherforecast!!)
+                      }
+                     .doOnError { error ->
+                                        System.err.println("The error message is: " + error.message)
+                      }
+                      .observeOn(AndroidSchedulers.mainThread())
+                      .subscribe{ mainView.forecast_recyclerview.layoutManager =
+                                                                       LinearLayoutManager(mainView)
+                          mainView.forecast_recyclerview.adapter = ForecastRecyclerView(it,mainView)
+                          mweatherforecast = it
+                      }
+    }
+
+    override fun loadDatafromCache() {
+        Thread {
+        mainView.forecast_recyclerview.layoutManager = LinearLayoutManager(mainView)
+        mainView.forecast_recyclerview.adapter =
+            ForecastRecyclerView(mainView.forecastDataBase.forecastdao().getforecastWeather(),mainView)
+        }.start()
     }
 
     override fun onDetach() {
@@ -44,4 +59,3 @@ class MainPresenter: BasePresenter<MainActivity>{
     }
 
 }
-

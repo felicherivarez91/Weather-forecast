@@ -2,6 +2,7 @@ package com.example.mooncascade.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mooncascade.App
 import com.example.mooncascade.R
@@ -12,12 +13,10 @@ import com.example.mooncascade.di.component.AppComponent
 import com.example.mooncascade.di.component.DaggerMainActivityComponent
 import com.example.mooncascade.presenter.MainPresenter
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),ForecastRecyclerView.OnItemClickedListener{
 
     private lateinit var appcomponent: AppComponent
 
@@ -44,16 +43,11 @@ class MainActivity : AppCompatActivity() {
 
         if (mainPresenter.isInternetExist()){
             forecast = retrofitCall.getforecastweather()
-            mainPresenter.setData(forecast)
+            mainPresenter.loadDatafromInternet(forecast)
         }
-        else{
-            Thread {
-                forecast_recyclerview.layoutManager = LinearLayoutManager(this)
-                forecast_recyclerview.adapter =
-                           ForecastRecyclerView(forecastDataBase.forecastdao().getforecastWeather())
-            }.start()
+        else if (!mainPresenter.isInternetExist() ){
+            mainPresenter.loadDatafromCache()
         }
-
     }
 
     override fun onDestroy() {
@@ -61,5 +55,19 @@ class MainActivity : AppCompatActivity() {
         mainPresenter.onDetach()
     }
 
-}
+    override fun onItemClicked(forecastweather: ForecastWeather, position : Int) {
+        if (position == 0){
+            forecast_recyclerview.visibility = View.INVISIBLE
+            cities_recyclerview.layoutManager = LinearLayoutManager(this)
+            cities_recyclerview.adapter = CityRecyclerView(forecastweather)
+            cities_recyclerview.visibility = View.VISIBLE
+        }
+    }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+        cities_recyclerview.visibility = View.INVISIBLE
+        forecast_recyclerview.visibility = View.VISIBLE
+    }
+
+}

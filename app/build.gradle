@@ -43,11 +43,10 @@ dependencies {
     implementation 'android.arch.persistence.room:runtime:2.1.0'
     kapt 'android.arch.persistence.room:compiler:2.1.0'
     kapt 'com.google.dagger:dagger-compiler:2.24'
-    def room_version = "2.2.0"
-    implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
-    implementation "androidx.room:room-rxjava2:$room_version"
-    testImplementation "androidx.room:room-testing:$room_version"
+    implementation "androidx.room:room-runtime:2.2.1"
+    kapt "androidx.room:room-compiler:2.2.1"
+    implementation "androidx.room:room-rxjava2:2.2.1"
+    testImplementation "androidx.room:room-testing:2.2.1"
 
 
     annotationProcessor 'com.google.dagger:dagger-compiler:2.24'

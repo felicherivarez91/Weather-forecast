@@ -25,7 +25,8 @@ data class Day(
                @SerializedName("tempmax") val mtempmax : String,
                @SerializedName("text") val mtext : String,
                @SerializedName("peipsi") val mpeipsi : String,
-               @SerializedName("sea") val msea: String
+               @SerializedName("sea") val msea: String,
+               @SerializedName("places") val mplaces : List<Places>
               )
 
 data class Night(
@@ -36,5 +37,10 @@ data class Night(
                  @SerializedName("peipsi") val mpeipsi : String,
                  @SerializedName("sea") val msea: String
                 )
+
+data class Places(
+                  @SerializedName("name") val mplacesname : String,
+                  @SerializedName("tempmin") val mtempmin : String
+                 )
 
 

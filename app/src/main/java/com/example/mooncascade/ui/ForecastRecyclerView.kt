@@ -8,11 +8,14 @@ import com.example.mooncascade.R
 import com.example.mooncascade.data.ForecastWeather
 import kotlinx.android.synthetic.main.forecast_layout.view.*
 
-class ForecastRecyclerView(private val forecastweather: ForecastWeather) :
-                                           RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>() {
+
+
+class ForecastRecyclerView(private val forecastweather: ForecastWeather,
+                           private val context : MainActivity) :
+                                            RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
+        var view = LayoutInflater.from(parent.context)
             .inflate(R.layout.forecast_layout, parent, false)
         return ViewHolder(view)
     }
@@ -38,6 +41,7 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather) :
             txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
             txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi }
             txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea }
+            itemView.setOnClickListener {context.onItemClicked(forecastweather,position) }
         }
     }
 
@@ -108,6 +112,13 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather) :
         val txtnightsea = view.txtnightsea
         val txtnighttext = view.txtnighttext
         val txtnightpeipsi = view.txtnightpeipsi
+
+    }
+
+
+
+    interface OnItemClickedListener{
+        fun onItemClicked(forecastweather: ForecastWeather, position: Int)
     }
 
 }
