@@ -2,6 +2,7 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -19,13 +20,24 @@
             android:padding="2dp">
 
             <TextView
+                android:id="@+id/txtdaycaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                android:text="@string/weather_for_day"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
                 android:id="@+id/txtdate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtdaycaption"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -62,13 +74,24 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/txttempmincaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                android:text="@string/temp_range"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtphenomenon" />
+
+            <TextView
                 android:id="@+id/txttempmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txttempmincaption"
                 app:layout_constraintTop_toBottomOf="@+id/txtphenomenon" />
 
             <TextView
@@ -147,13 +170,24 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtsea" />
 
             <TextView
+                android:id="@+id/txtnighttempcaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/temp_range"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightphenomenon"/>
+
+            <TextView
                 android:id="@+id/txtnighttempmin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/txtnighttempcaption"
                 app:layout_constraintTop_toBottomOf="@+id/txtnightphenomenon" />
 
             <TextView

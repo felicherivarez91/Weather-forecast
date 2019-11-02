@@ -25,18 +25,17 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
         matchnightimg(forecastweather.forecast[position].mnight.mphenomenon , holder)
 
         with(holder){
-            txttitle.apply{ text =  String.format("Weather forecast for:       %s",
-                                                        forecastweather.forecast[position].mdate) }
+            txttitle.apply{ text = forecastweather.forecast[position].mdate }
             txtphenomenon.apply{ text = forecastweather.forecast[position].mday.mphenomenon}
             txttext.apply{ text = forecastweather.forecast[position].mday.mtext}
             txtpeipsi.apply{ text = forecastweather.forecast[position].mday.mpeipsi}
-            txttempmin.apply{text = String.format("Temperature range:   %s......",
+            txttempmin.apply{text = String.format("%s......",
                                                  forecastweather.forecast[position].mday.mtempmin)}
             txttempmax.apply{ text = forecastweather.forecast[position].mday.mtempmax }
             txtsea.apply { text = forecastweather.forecast[position].mday.msea  }
             txtnighttext.apply{ text = forecastweather.forecast[position].mnight.mtext }
             txtnightphenomenon.apply{ text = forecastweather.forecast[position].mnight.mphenomenon }
-            txtnighttempmin.apply{text = String.format("Temperature range:   %s......",
+            txtnighttempmin.apply{text = String.format("%s......",
                                                 forecastweather.forecast[position].mnight.mtempmin)}
             txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
             txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi }

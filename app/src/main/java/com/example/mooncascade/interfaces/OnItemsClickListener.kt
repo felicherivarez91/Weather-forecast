@@ -5,6 +5,5 @@ import com.example.mooncascade.data.ForecastWeather
 interface OnItemsClickListener {
 
     fun onItemforecastClicked(forecastweather: ForecastWeather, position: Int)
-    fun onCityClicked()
-    
+
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Прогноз погоды в Эстонии</string>
+    <string name="lang">Русский</string>
+    <string name="forecast_day">Дневной прогноз:</string>
+    <string name="forecast_night">Прогноз ночью:</string>
+    <string name="temp_range">Температурный диапазон:</string>
+    <string name="weather_for_day">Прогноз погоды состоянием на:</string>
+    <string name="forecast_city">Прогноз погоды для города</string>
+
+</resources>

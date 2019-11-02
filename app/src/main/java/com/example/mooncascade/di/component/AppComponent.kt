@@ -7,6 +7,7 @@ import com.example.mooncascade.di.modules.ContextModule
 import com.example.mooncascade.di.modules.ForecastDBModule
 import com.example.mooncascade.di.modules.RequestsModule
 import com.example.mooncascade.presenter.MainPresenter
+import com.example.mooncascade.localizationsupport.LocaleManager
 import dagger.Component
 import javax.inject.Singleton
 
@@ -19,6 +20,8 @@ interface AppComponent {
     val forecastdatabase : ForecastDataBase
 
     val mainpresenter : MainPresenter
+
+    val localeManager : LocaleManager
 
     fun injectApp(myApplication: App)
 }

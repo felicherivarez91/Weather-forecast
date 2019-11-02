@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Eesti prognoos</string>
+    <string name="forecast_day">Päeva prognoos:</string>
+    <string name="lang">Eesti</string>
+    <string name="forecast_night">Ilmaennustus öösel: </string>
+    <string name="temp_range">Temperatuurivahemik: </string>
+    <string name="weather_for_day">Ilmaprognoos kui:</string>
+    <string name="forecast_city">Ilmateade linnale </string>
+
+</resources>

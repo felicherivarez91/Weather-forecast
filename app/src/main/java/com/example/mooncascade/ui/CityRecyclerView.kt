@@ -24,9 +24,8 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
         with(holder) {
             mcityname.apply { text = mweatherforecast.forecast[currday].mday.mplaces[position].
                                                                                         mplacesname}
-            mtempmin.apply { text = mweatherforecast.forecast[currday].mday.mplaces[position].
-                                                                                          mtempmin }
-            itemView.setOnClickListener { mcontext.onCityClicked()  }
+            mtempmin.apply {text = String.format("Temperature range:   %s......",
+                               mweatherforecast.forecast[currday].mday.mplaces[position].mtempmin) }
         }
     }
 
@@ -35,6 +34,7 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
         val mcityname = mView.txtcityname
         val mtempmin = mView.txtcitytempmin
+        val mtextmax = mView.txttempmax
     }
 
 }

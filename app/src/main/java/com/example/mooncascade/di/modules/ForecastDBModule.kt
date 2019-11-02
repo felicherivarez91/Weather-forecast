@@ -6,6 +6,7 @@ import javax.inject.Singleton
 import androidx.room.Room
 import com.example.mooncascade.db.ForecastDAO
 import com.example.mooncascade.db.ForecastDataBase
+import com.example.mooncascade.localizationsupport.LocaleManager
 import dagger.Module
 
 @Module
@@ -24,5 +25,11 @@ class ForecastDBModule{
     @Provides
     fun provideShowDao(forecastDataBase: ForecastDataBase): ForecastDAO {
         return forecastDataBase.forecastdao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideLocaleManager(): LocaleManager {
+        return LocaleManager()
     }
 }

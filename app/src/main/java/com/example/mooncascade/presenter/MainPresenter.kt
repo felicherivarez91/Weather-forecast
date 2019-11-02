@@ -3,7 +3,7 @@ package com.example.mooncascade.presenter
 import android.content.Context
 import android.net.ConnectivityManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.mooncascade.BasePresenter
+import com.example.mooncascade.interfaces.BasePresenter
 import com.example.mooncascade.data.ForecastWeather
 import com.example.mooncascade.ui.ForecastRecyclerView
 import com.example.mooncascade.ui.MainActivity
@@ -13,11 +13,11 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainPresenter: BasePresenter<MainActivity>{
+class MainPresenter: BasePresenter<MainActivity> {
 
     private lateinit var mainView: MainActivity
     private var disposable : Disposable? = null
-    private var mweatherforecast : ForecastWeather? = null
+    @Volatile private var mweatherforecast : ForecastWeather? = null
 
     override fun onAttach(view: MainActivity) {
         this.mainView = view
@@ -38,8 +38,8 @@ class MainPresenter: BasePresenter<MainActivity>{
                      .doOnError { error ->
                                         System.err.println("The error message is: " + error.message)
                       }
-                      .observeOn(AndroidSchedulers.mainThread())
-                      .subscribe{ mainView.forecast_recyclerview.layoutManager =
+                     .observeOn(AndroidSchedulers.mainThread())
+                     .subscribe{ mainView.forecast_recyclerview.layoutManager =
                                                                        LinearLayoutManager(mainView)
                           mainView.forecast_recyclerview.adapter = ForecastRecyclerView(it,mainView)
                           mweatherforecast = it
@@ -48,9 +48,12 @@ class MainPresenter: BasePresenter<MainActivity>{
 
     override fun loadDatafromCache() {
         Thread {
-        mainView.forecast_recyclerview.layoutManager = LinearLayoutManager(mainView)
-        mainView.forecast_recyclerview.adapter =
-            ForecastRecyclerView(mainView.forecastDataBase.forecastdao().getforecastWeather(),mainView)
+            mweatherforecast = mainView.forecastDataBase.forecastdao().getforecastWeather()
+            mainView.runOnUiThread{
+                        mainView.forecast_recyclerview.layoutManager = LinearLayoutManager(mainView)
+                mainView.forecast_recyclerview.adapter =
+                                                   ForecastRecyclerView(mweatherforecast!!,mainView)
+            }
         }.start()
     }
 

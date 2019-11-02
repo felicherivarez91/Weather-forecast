@@ -1,8 +1,11 @@
 <resources>
 
-    <string name="app_name">Mooncascade</string>
+    <string name="app_name">Weather forecast for Estonia</string>
     <string name="forecast_day">Day weather forecast: </string>
+    <string name="lang">English</string>
     <string name="forecast_night">Night weather forecast: </string>
     <string name="temp_range">Temperature range: </string>
+    <string name="weather_for_day">Weather forecast for:</string>
+    <string name="forecast_city">Weather forecast for the city</string>
 
 </resources>

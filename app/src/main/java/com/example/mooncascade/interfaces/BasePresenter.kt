@@ -1,4 +1,4 @@
-package com.example.mooncascade
+package com.example.mooncascade.interfaces
 
 import android.app.Activity
 import com.example.mooncascade.data.ForecastWeather
