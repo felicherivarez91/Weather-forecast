@@ -8,5 +8,26 @@
     <string name="temp_range">Температурный диапазон:</string>
     <string name="weather_for_day">Прогноз погоды состоянием на:</string>
     <string name="forecast_city">Прогноз погоды для города</string>
+    <string name="no_info">Нет инфы</string>
+    <string name="clear">Ясно</string>
+    <string name="few_clouds">Малооблачно</string>
+    <string name="variable_clouds">Умеренная облачность</string>
+    <string name="cloudy_with_clear_spells">Облачно с прояснениями</string>
+    <string name="cloudy">Облачно</string>
+    <string name="light_rain">Слабый дождь</string>
+    <string name="moderate_rain">Умеренный дождь</string>
+    <string name="heavy_rain">Сильный дождь</string>
+    <string name="light_sleet">Слабый мокрый снег</string>
+    <string name="moderate_sleet">Умеренный мокрый снег</string>
+    <string name="light_snow_shower">Небольшой снегопад</string>
+    <string name="moderate_snow_shower">Умеренный снегопад</string>
+    <string name="light_shower">Слабый ливень</string>
+    <string name="moderate_shower">Умеренный ливень</string>
+    <string name="heavy_shower">Сильный ливень</string>
+    <string name="hail">Град</string>
+    <string name="mist">Туман</string>
+    <string name="fog">Сильный туман</string>
+    <string name="thunderstorm">Гроза</string>
+    <string name="thunder">Гром</string>
 
 </resources>

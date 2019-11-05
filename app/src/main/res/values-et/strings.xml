@@ -8,5 +8,26 @@
     <string name="temp_range">Temperatuurivahemik: </string>
     <string name="weather_for_day">Ilmaprognoos kui:</string>
     <string name="forecast_city">Ilmateade linnale </string>
+    <string name="no_info">Teave puudub</string>
+    <string name="clear">Selge</string>
+    <string name="few_clouds">Vähesed pilved</string>
+    <string name="variable_clouds">Muutlik pilvisus</string>
+    <string name="cloudy_with_clear_spells">Pilves selgimistega ilm</string>
+    <string name="cloudy">Pilves</string>
+    <string name="light_rain">Kerge vihm</string>
+    <string name="moderate_rain">Mõõdukas vihm</string>
+    <string name="heavy_rain">Paduvihm</string>
+    <string name="light_sleet">Kerge lörts</string>
+    <string name="moderate_sleet">Mõõdukas lörts</string>
+    <string name="light_snow_shower">Kerge lumesadu</string>
+    <string name="moderate_snow_shower">Mõõdukas lumesadu</string>
+    <string name="light_shower">Kerge dušš</string>
+    <string name="moderate_shower">Mõõdukas dušš</string>
+    <string name="heavy_shower">Raske dušš</string>
+    <string name="hail">Rahe</string>
+    <string name="mist">Udu</string>
+    <string name="fog">Hammas</string>
+    <string name="thunderstorm">Äike</string>
+    <string name="thunder">Müristamine</string>
 
 </resources>

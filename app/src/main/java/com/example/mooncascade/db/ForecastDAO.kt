@@ -6,6 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mooncascade.data.ForecastWeather
 
+/*
+ * @author Dmitry Tkachuk
+ * Created on 23.10.2019
+ */
 @Dao
 interface ForecastDAO {
 
@@ -14,4 +18,5 @@ interface ForecastDAO {
 
     @Query("SELECT * FROM forecast")
     fun getforecastWeather() : ForecastWeather
+
 }

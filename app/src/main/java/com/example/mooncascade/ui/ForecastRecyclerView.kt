@@ -1,5 +1,6 @@
 package com.example.mooncascade.ui
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,17 @@ import com.example.mooncascade.data.ForecastWeather
 import kotlinx.android.synthetic.main.forecast_layout.view.*
 
 
-
+/**
+ * @author Dmitry Tkachuk
+ * Created on 21.10.2019
+ * All rights reserved
+ */
 class ForecastRecyclerView(private val forecastweather: ForecastWeather,
                            private val context : MainActivity) :
                                             RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        var view = LayoutInflater.from(parent.context)
+        val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.forecast_layout, parent, false)
         return ViewHolder(view)
     }
@@ -26,67 +31,201 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
 
         with(holder){
             txttitle.apply{ text = forecastweather.forecast[position].mdate }
-            txtphenomenon.apply{ text = forecastweather.forecast[position].mday.mphenomenon}
             txttext.apply{ text = forecastweather.forecast[position].mday.mtext}
-            txtpeipsi.apply{ text = forecastweather.forecast[position].mday.mpeipsi}
+            txtpeipsi.apply{ text = forecastweather.forecast[position].mday.mpeipsi ?:
+                                                              resources.getString(R.string.no_info)}
             txttempmin.apply{text = String.format("%s......",
                                                  forecastweather.forecast[position].mday.mtempmin)}
             txttempmax.apply{ text = forecastweather.forecast[position].mday.mtempmax }
-            txtsea.apply { text = forecastweather.forecast[position].mday.msea  }
+            txtsea.apply { text = forecastweather.forecast[position].mday.msea ?:
+                                                              resources.getString(R.string.no_info)}
             txtnighttext.apply{ text = forecastweather.forecast[position].mnight.mtext }
-            txtnightphenomenon.apply{ text = forecastweather.forecast[position].mnight.mphenomenon }
             txtnighttempmin.apply{text = String.format("%s......",
                                                 forecastweather.forecast[position].mnight.mtempmin)}
             txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
-            txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi }
-            txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea }
+            txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi ?:
+                                                            resources.getString(R.string.no_info) }
+            txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea ?:
+                                                           resources.getString(R.string.no_info) }
             itemView.setOnClickListener {context.onItemforecastClicked(forecastweather,position) }
         }
     }
 
-    private fun matchdayimg(phenomenon : String , holder: ViewHolder) {
-        when (phenomenon){
-            "Clear" -> holder.imgday.setImageResource(R.drawable.clear)
-            "Few clouds" -> holder.imgday.setImageResource(R.drawable.few_clouds)
-            "Variable clouds", "Cloudy with clear spells" ->
-                                          holder.imgday.setImageResource(R.drawable.variable_clouds)
-            "Cloudy" ->  holder.imgday.setImageResource(R.drawable.cloudy)
-            "Light rain"-> holder.imgday.setImageResource(R.drawable.light_rain)
-            "Moderate rain" , "Heavy rain"
-                                         -> holder.imgday.setImageResource(R.drawable.moderate_rain)
-            "Light snow shower" -> holder.imgday.setImageResource(R.drawable.light_snow_shower)
-            "Moderate snow shower" -> holder.imgday.setImageResource(R.drawable.moderate_snow)
-            "Light shower", "Moderate shower", "Heavy shower"
-                                          -> holder.imgday.setImageResource(R.drawable.light_shower)
-            "Hail" -> holder.imgday.setImageResource(R.drawable.hail)
-            "Light sleet","Moderate sleet" -> holder.imgday.setImageResource(R.drawable.sleet)
-            "Mist" ->  holder.imgday.setImageResource(R.drawable.mist)
-            "Fog" ->  holder.imgday.setImageResource(R.drawable.fog)
-            "Thunderstorm" -> holder.imgday.setImageResource(R.drawable.thunderstorm)
-            "Thunder" ->  holder.imgday.setImageResource(R.drawable.thunder)
-            else -> holder.imgday.setImageResource(R.drawable.noinfo)
-        }
+        fun matchdayimg(phenomenon: String, holder: ViewHolder) {
+            when (phenomenon) {
+                "Clear" -> {
+                    holder.txtphenomenon.text = context.resources.getString(R.string.clear)
+                    holder.imgday.setImageResource(R.drawable.clear)
+                }
+                "Few clouds" -> {
+                    holder.imgday.setImageResource(R.drawable.few_clouds)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.few_clouds)
+                }
+                "Variable clouds" -> {
+                    holder.imgday.setImageResource(R.drawable.variable_clouds)
+                    holder.txtphenomenon.text =
+                        context.resources.getString(R.string.variable_clouds)
+                }
+                "Cloudy with clear spells" -> {
+                    holder.txtphenomenon.text =
+                        context.resources.getString(R.string.cloudy_with_clear_spells)
+                    holder.imgday.setImageResource(R.drawable.variable_clouds)
+                }
+                "Cloudy" -> {
+                    holder.imgday.setImageResource(R.drawable.cloudy)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.cloudy)
+                }
+                "Light rain" -> {
+                    holder.imgday.setImageResource(R.drawable.light_rain)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.light_rain)
+                }
+                "Moderate rain" -> {
+                    holder.imgday.setImageResource(R.drawable.moderate_rain)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.moderate_rain)
+                }
+                "Heavy rain" -> {
+                    holder.txtphenomenon.text = context.resources.getString(R.string.heavy_rain)
+                    holder.imgday.setImageResource(R.drawable.moderate_rain)
+                }
+                "Light snow shower" -> {
+                    holder.imgday.setImageResource(R.drawable.light_snow_shower)
+                    holder.txtphenomenon.text =
+                        context.resources.getString(R.string.light_snow_shower)
+                }
+                "Moderate snow shower" -> {
+                    holder.imgday.setImageResource(R.drawable.moderate_snow)
+                    holder.txtphenomenon.text =
+                        context.resources.getString(R.string.moderate_snow_shower)
+                }
+                "Light shower" -> {
+                    holder.imgday.setImageResource(R.drawable.light_shower)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.light_shower)
+                }
+                "Moderate shower" -> {
+                    holder.imgday.setImageResource(R.drawable.light_shower)
+                    holder.txtphenomenon.text =
+                        context.resources.getString(R.string.moderate_shower)
+                }
+                "Heavy shower" -> {
+                    holder.imgday.setImageResource(R.drawable.light_shower)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.heavy_shower)
+                }
+                "Hail" -> {
+                    holder.imgday.setImageResource(R.drawable.hail)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.hail)
+                }
+                "Light sleet" -> {
+                    holder.txtphenomenon.text = context.resources.getString(R.string.light_sleet)
+                    holder.imgday.setImageResource(R.drawable.sleet)
+                }
+                "Moderate sleet" -> {
+                    holder.txtphenomenon.text = context.resources.getString(R.string.moderate_sleet)
+                    holder.imgday.setImageResource(R.drawable.sleet)
+                }
+                "Mist" -> {
+                    holder.imgday.setImageResource(R.drawable.mist)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.mist)
+                }
+                "Fog" -> {
+                    holder.imgday.setImageResource(R.drawable.fog)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.fog)
+                }
+                "Thunderstorm" -> {
+                    holder.imgday.setImageResource(R.drawable.thunderstorm)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.thunderstorm)
+                }
+                "Thunder" -> {
+                    holder.imgday.setImageResource(R.drawable.thunder)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.thunder)
+                }
+                else -> holder.imgday.setImageResource(R.drawable.noinfo)
+            }
     }
 
-    private fun matchnightimg(phenomenon : String , holder: ViewHolder){
+    fun matchnightimg(phenomenon : String , holder: ViewHolder){
         when (phenomenon){
-            "Clear" -> holder.imgnight.setImageResource(R.drawable.cloudy_moon)
-            "Few clouds" -> holder.imgnight.setImageResource(R.drawable.few_clouds)
-            "Variable clouds", "Cloudy with clear spells" ->
+            "Clear" ->{
+                holder.imgnight.setImageResource(R.drawable.cloudy_moon)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.clear)
+            }
+            "Few clouds" -> {
+                holder.imgnight.setImageResource(R.drawable.few_clouds)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.few_clouds)
+            }
+            "Variable clouds" ->{
                 holder.imgnight.setImageResource(R.drawable.night_variable_clouds)
-            "Cloudy" ->  holder.imgnight.setImageResource(R.drawable.cloudy)
-            "Light rain" -> holder.imgnight.setImageResource(R.drawable.light_rain)
-            "Moderate rain","Heavy rain" -> holder.imgnight.setImageResource(R.drawable.moderate_rain)
-            "Light shower" ->holder.imgnight.setImageResource(R.drawable.heavy_shower)
-            "Moderate shower","Heavy shower"-> holder.imgnight.setImageResource(R.drawable.night_shower)
-            "Light snow shower" -> holder.imgnight.setImageResource(R.drawable.light_snow_shower)
-            "Moderate snow shower" -> holder.imgnight.setImageResource(R.drawable.moderate_snow)
-            "Light sleet","Moderate sleet" -> holder.imgnight.setImageResource(R.drawable.sleet)
-            "Hail" -> holder.imgnight.setImageResource(R.drawable.hail)
-            "Mist" -> holder.imgnight.setImageResource(R.drawable.mist)
-            "Fog" -> holder.imgnight.setImageResource(R.drawable.fog)
-            "Thunderstorm" -> holder.imgnight.setImageResource(R.drawable.thunderstorm)
-            "Thunder" -> holder.imgnight.setImageResource(R.drawable.thunder)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.variable_clouds)
+
+            }
+            "Cloudy with clear spells" ->{
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.cloudy_with_clear_spells)
+                holder.imgnight.setImageResource(R.drawable.night_variable_clouds)
+            }
+
+            "Cloudy" -> {
+                holder.imgnight.setImageResource(R.drawable.cloudy)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.cloudy)
+            }
+            "Light rain" ->{
+                holder.imgnight.setImageResource(R.drawable.light_rain)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.light_rain)
+            }
+            "Moderate rain"->{
+                holder.imgnight.setImageResource(R.drawable.moderate_rain)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.moderate_rain)
+            }
+            "Heavy rain"-> {
+                holder.imgnight.setImageResource(R.drawable.moderate_rain)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.heavy_rain)
+            }
+            "Light shower" ->{
+                holder.imgnight.setImageResource(R.drawable.heavy_shower)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.light_shower)
+            }
+            "Moderate shower" ->{
+                holder.imgnight.setImageResource(R.drawable.night_shower)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.moderate_shower)
+            }
+            "Heavy shower"-> {
+                holder.imgnight.setImageResource(R.drawable.night_shower)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.heavy_shower)
+            }
+            "Light snow shower" -> {
+                holder.imgnight.setImageResource(R.drawable.light_snow_shower)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.light_snow_shower)
+            }
+            "Moderate snow shower" -> {
+                holder.imgnight.setImageResource(R.drawable.moderate_snow)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.moderate_snow_shower)
+            }
+            "Light sleet"->{
+                holder.imgnight.setImageResource(R.drawable.sleet)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.light_sleet)
+            }
+            "Moderate sleet" -> {
+                holder.imgnight.setImageResource(R.drawable.sleet)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.moderate_sleet)
+            }
+            "Hail" -> {
+                holder.imgnight.setImageResource(R.drawable.hail)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.hail)
+            }
+            "Mist" -> {
+                holder.imgnight.setImageResource(R.drawable.mist)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.mist)
+            }
+            "Fog" -> {
+                holder.imgnight.setImageResource(R.drawable.fog)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.fog)
+            }
+            "Thunderstorm" -> {
+                holder.imgnight.setImageResource(R.drawable.thunderstorm)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.thunderstorm)
+            }
+            "Thunder" -> {
+                holder.imgnight.setImageResource(R.drawable.thunder)
+                holder.txtnightphenomenon.text = context.resources.getString(R.string.thunder)
+            }
             else -> holder.imgnight.setImageResource(R.drawable.noinfo)
         }
     }

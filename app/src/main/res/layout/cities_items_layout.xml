@@ -19,17 +19,49 @@
             android:layout_height="match_parent"
             android:padding="2dp">
 
+            <TextView
+                android:id="@+id/txtdayforecast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/forecast_day"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="15dp"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtcitynamecaption" />
 
+            <TextView
+                android:id="@+id/txtcitynamecaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:text="@string/forecast_city"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtcityname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:layout_marginStart="2dp"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/txtcitynamecaption"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txttempmincaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
+                android:text="@string/temp_range"
                 android:textSize="@dimen/text_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/txtdayforecast" />
 
             <TextView
                 android:id="@+id/txtcitytempmin"
@@ -38,18 +70,106 @@
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
                 android:textSize="@dimen/text_size"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/txtcityname" />
+                app:layout_constraintStart_toEndOf="@+id/txttempmincaption"
+                app:layout_constraintTop_toBottomOf="@+id/txtdayforecast" />
 
             <TextView
                 android:id="@+id/txttempmax"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/txtcitytempmin"
+                app:layout_constraintTop_toBottomOf="@+id/txtdayforecast" />
+
+            <TextView
+                android:id="@+id/txtphenomenon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txttempmincaption" />
+
+            <ImageView
+                android:id="@+id/imgday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtcityname">
+
+            </ImageView>
+
+            <TextView
+                android:id="@+id/txtnightcaption"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:text="@string/forecast_night"
+                android:textColor="@android:color/background_dark"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtphenomenon" />
+
+            <TextView
+                android:id="@+id/txttempragnenight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                android:text="@string/temp_range"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightcaption" />
+
+            <TextView
+                android:id="@+id/txttempminnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_size"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/txttempragnenight"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightcaption" />
+
+            <TextView
+                android:id="@+id/txttempmaxnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:textSize="@dimen/text_size"
+                app:layout_constraintStart_toEndOf="@+id/txttempminnight"
+                app:layout_constraintTop_toBottomOf="@+id/txtnightcaption" />
+
+
+            <TextView
+                android:id="@+id/txtnightphenomenon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size"
                 android:layout_marginStart="@dimen/margin_size"
                 android:layout_marginTop="@dimen/margin_size"
-                app:layout_constraintStart_toStartOf="@id/txtcitytempmin"
-                app:layout_constraintTop_toTopOf="@id/txtcityname" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txttempragnenight" />
+
+            <ImageView
+                android:id="@+id/imgnight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_size"
+                android:layout_marginEnd="@dimen/margin_size"
+                android:adjustViewBounds="true"
+                android:scaleType="fitCenter"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/txtphenomenon">
+
+            </ImageView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

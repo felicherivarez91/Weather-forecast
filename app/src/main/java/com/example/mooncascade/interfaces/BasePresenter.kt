@@ -4,6 +4,11 @@ import android.app.Activity
 import com.example.mooncascade.data.ForecastWeather
 import io.reactivex.Observable
 
+/**
+ * @author Dmitry Tkachuk
+ * Created on 18.10.2019
+ * All rights reserved
+ */
 interface BasePresenter<in T: Activity> {
 
     fun onAttach(view: T)

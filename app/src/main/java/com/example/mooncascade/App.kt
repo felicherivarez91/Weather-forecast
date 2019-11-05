@@ -10,9 +10,10 @@ import com.example.mooncascade.localizationsupport.LocaleManager
 import com.example.mooncascade.localizationsupport.LocaleManager.Companion.DEFAULT_LANGUAGE
 import javax.inject.Inject
 
-/*
- * @Copyright Dmytro Tkachuk
- * Created on 16.10.2019
+/**
+ * @author Dmitry Tkachuk
+ * Created on 20.10.2019
+ * All rights reserved
  */
 class App : Application(){
 

@@ -5,6 +5,11 @@ import android.content.res.Configuration
 import androidx.preference.PreferenceManager
 import java.util.*
 
+/**
+ * @author Dmitry Tkachuk
+ * Created on 02.11.2019
+ * All rights reserved
+ */
 class LocaleManager {
 
     fun getLanguage(context: Context): String? {

@@ -26,6 +26,11 @@ import com.example.mooncascade.localizationsupport.LocaleManager.Companion.RUSSI
 import com.example.mooncascade.localizationsupport.LocaleManager.Companion.UKRAINIAN_LANGUAGE
 import android.view.KeyEvent
 
+/**
+ * @author Dmitry Tkachuk
+ * Created on 16.10.2019
+ * All rights reserved
+ */
 class MainActivity : AppCompatActivity(), OnItemsClickListener{
 
     @Inject
@@ -43,6 +48,7 @@ class MainActivity : AppCompatActivity(), OnItemsClickListener{
     private lateinit var forecast : Observable<ForecastWeather>
     private lateinit var appcomponent: AppComponent
 
+    //Dagger assign and Presenter attach
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
