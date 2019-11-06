@@ -3,6 +3,12 @@ package com.example.mooncascade.data
 import androidx.room.*
 import com.google.gson.annotations.SerializedName
 
+/**
+ * @author Dmitry Tkachuk
+ * Created on 23.10.2019
+ * All rights reserved
+ */
+
 const val WEATHER_LOCATION_ID = 0
 
 @Entity(tableName = "forecast")

@@ -2,6 +2,7 @@ package com.example.mooncascade.interfaces
 
 import android.app.Activity
 import com.example.mooncascade.data.ForecastWeather
+import com.example.mooncascade.databinding.ActivityMainBinding
 import io.reactivex.Observable
 
 /**
@@ -16,5 +17,6 @@ interface BasePresenter<in T: Activity> {
     fun loadDatafromInternet(forecast : Observable<ForecastWeather>)
     fun loadDatafromCache()
     fun onDetach()
+    fun  setbinding(binding : ActivityMainBinding)
 
 }

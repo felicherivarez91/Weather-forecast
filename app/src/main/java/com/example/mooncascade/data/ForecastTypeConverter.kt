@@ -5,14 +5,18 @@ import com.google.gson.reflect.TypeToken
 import com.google.gson.Gson
 import java.util.*
 
-
+/**
+ * @author Dmitry Tkachuk
+ * Created on 24.10.2019
+ * All rights reserved
+ */
 class ForecastTypeConverter {
 
     var gson = Gson()
 
     @TypeConverter
     fun stringToForecastList(data: String?): List<ForecastList> {
-        if (data == null) {
+        if (data == null || data == "") {
             return Collections.emptyList()
         }
 

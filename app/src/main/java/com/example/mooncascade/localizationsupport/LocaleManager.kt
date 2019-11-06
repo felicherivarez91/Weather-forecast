@@ -12,6 +12,7 @@ import java.util.*
  */
 class LocaleManager {
 
+    //Load language from Preference Manager supported by AndroidX
     fun getLanguage(context: Context): String? {
         return getPersistedData(context, Locale.getDefault().language)
     }

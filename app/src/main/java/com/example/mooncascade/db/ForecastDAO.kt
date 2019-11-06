@@ -6,9 +6,10 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.mooncascade.data.ForecastWeather
 
-/*
+/**
  * @author Dmitry Tkachuk
  * Created on 23.10.2019
+ * All rights reserved
  */
 @Dao
 interface ForecastDAO {

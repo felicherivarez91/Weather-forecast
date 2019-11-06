@@ -4,9 +4,10 @@ import androidx.room.*
 import com.example.mooncascade.data.ForecastTypeConverter
 import com.example.mooncascade.data.ForecastWeather
 
-/*
+/**
  * @author Dmitry Tkachuk
  * Created on 23.10.2019
+ * All rights reserved
  */
 @Database(entities = [ForecastWeather::class],version = 1, exportSchema = false)
 @TypeConverters(ForecastTypeConverter::class)

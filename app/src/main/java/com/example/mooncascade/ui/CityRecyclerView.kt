@@ -6,17 +6,26 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mooncascade.R
 import com.example.mooncascade.data.ForecastWeather
+import com.example.mooncascade.interfaces.BindableAdapter
 import kotlinx.android.synthetic.main.cities_items_layout.view.*
+import kotlinx.android.synthetic.main.cities_items_layout.view.imgday
+import kotlinx.android.synthetic.main.cities_items_layout.view.imgnight
+import kotlinx.android.synthetic.main.cities_items_layout.view.txtnightphenomenon
+import kotlinx.android.synthetic.main.cities_items_layout.view.txtphenomenon
+import kotlinx.android.synthetic.main.cities_items_layout.view.txttempmax
 
 /**
  * @author Dmitry Tkachuk
  * Created on 01.11.2019
  * All rights reserved
  */
-class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcontext : MainActivity):
-                                               RecyclerView.Adapter<CityRecyclerView.ViewHolder>() {
+const val CURRENT_DAY = 0
 
-    private val currday : Int = 0
+class CityRecyclerView(private val mcontext : MainActivity):
+                                               RecyclerView.Adapter<CityRecyclerView.ViewHolder>(),
+                                                                   BindableAdapter<ForecastWeather>{
+
+    private lateinit var mweatherforecast : ForecastWeather
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -25,25 +34,12 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        matchdayimg(mweatherforecast.forecast[currday].mday.mplaces[position].mphenomenon , holder)
-        matchnightimg(mweatherforecast.forecast[currday].mnight.mplaces[position].mphenomenon , holder)
-        with(holder) {
-            mcityname.apply { text = mweatherforecast.forecast[currday].mday.mplaces[position].
-                                                                                        mplacesname}
-            mtempmin.apply {text = String.format("%s......",
-                mweatherforecast.forecast[currday].mday.mplaces[position].mtempmin ?:
-                                                             resources.getString(R.string.no_info))}
-            mtextmax.apply { text = mweatherforecast.forecast[currday].mday.mplaces[position].
-                                                                                           mtempmax}
-            mtempminnight.apply { text = String.format("%s......",
-                mweatherforecast.forecast[currday].mnight.mplaces[position].mtempmin ?:
-                                                             resources.getString(R.string.no_info))}
-            mtempmaxngiht.apply { text = mweatherforecast.forecast[currday].mnight
-                               .mplaces[position].mtempmax ?: resources.getString(R.string.no_info)}
-
-        }
+        matchdayimg(mweatherforecast.forecast[CURRENT_DAY].mday.mplaces[position].mphenomenon , holder)
+        matchnightimg(mweatherforecast.forecast[CURRENT_DAY].mnight.mplaces[position].mphenomenon , holder)
+        holder.bind(mweatherforecast,position)
     }
-    fun matchdayimg(phenomenon: String, holder: ViewHolder) {
+
+    private fun matchdayimg(phenomenon: String, holder: ViewHolder) {
         when (phenomenon) {
             "Clear" -> {
                 holder.mphenomenon.text = mcontext.resources.getString(R.string.clear)
@@ -132,7 +128,7 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
         }
     }
 
-    fun matchnightimg(phenomenon : String , holder:ViewHolder){
+    private fun matchnightimg(phenomenon : String , holder:ViewHolder){
         when (phenomenon){
             "Clear" ->{
                 holder.imgnight.setImageResource(R.drawable.cloudy_moon)
@@ -180,11 +176,11 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
                 holder.imgnight.setImageResource(R.drawable.night_shower)
                 holder.txtnightphenomenon.text = mcontext.resources.getString(R.string.heavy_shower)
             }
-            "Light snow shower" -> {
+            "Light snowfall","Light snow shower" -> {
                 holder.imgnight.setImageResource(R.drawable.light_snow_shower)
                 holder.txtnightphenomenon.text = mcontext.resources.getString(R.string.light_snow_shower)
             }
-            "Moderate snow shower" -> {
+            "Moderate snowfall","Moderate snow shower" -> {
                 holder.imgnight.setImageResource(R.drawable.moderate_snow)
                 holder.txtnightphenomenon.text = mcontext.resources.getString(R.string.moderate_snow_shower)
             }
@@ -220,16 +216,31 @@ class CityRecyclerView(private val mweatherforecast : ForecastWeather, val mcont
         }
     }
 
-    override fun getItemCount(): Int = mweatherforecast.forecast[currday].mday.mplaces.size
+    override fun getItemCount(): Int = mweatherforecast.forecast[CURRENT_DAY].mday.mplaces.size
+
+    override fun setData(items: ForecastWeather) {
+        mweatherforecast = items
+    }
 
     inner class ViewHolder(mView: View) : RecyclerView.ViewHolder(mView) {
-        val mcityname = mView.txtcityname
-        val mtempmin = mView.txtcitytempmin
-        val mtextmax = mView.txttempmax
+
+        fun bind(forecastweather: ForecastWeather,position: Int) {
+            with(itemView){
+                txtcityname.apply { text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].
+                                                                                        mplacesname}
+                txtcitytempmin.apply {text = String.format("%s......",
+                            forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].mtempmin ?:
+                                                             resources.getString(R.string.no_info))}
+                txttempmax.apply { text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].mtempmax}
+                txttempminnight.apply { text = String.format("%s......",
+                    forecastweather.forecast[CURRENT_DAY].mnight.mplaces[position].mtempmin ?:
+                                                             resources.getString(R.string.no_info))}
+                txttempmaxnight.apply { text = forecastweather.forecast[CURRENT_DAY].mnight
+                    .mplaces[position].mtempmax ?: resources.getString(R.string.no_info)}
+            }
+        }
         val mphenomenon = mView.txtphenomenon
         val imgday = mView.imgday
-        val mtempminnight = mView.txttempminnight
-        val mtempmaxngiht = mView.txttempmaxnight
         val txtnightphenomenon = mView.txtnightphenomenon
         val imgnight = mView.imgnight
     }

@@ -29,5 +29,7 @@
     <string name="fog">Сильний туман</string>
     <string name="thunderstorm">Гроза</string>
     <string name="thunder">Грім</string>
+    <string name="no_database">На жаль,у вас немає збереженних данних в цьому застосунку.
+        Спробуйте запустити його коли у вас з\'явиться можливість підключитись до Інтеренету</string>
 
 </resources>

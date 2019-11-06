@@ -28,5 +28,7 @@
     <string name="fog">Fog</string>
     <string name="thunderstorm">Thunderstorm</string>
     <string name="thunder">Thunder</string>
+    <string name="no_database">Unfortunately,you don\'t have any saved data on the application.
+        Try to run it later when you\'ll have an ability to connect to the Internet</string>
 
 </resources>

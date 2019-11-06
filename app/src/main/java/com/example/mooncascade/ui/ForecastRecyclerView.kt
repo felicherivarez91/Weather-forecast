@@ -4,20 +4,23 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mooncascade.R
 import com.example.mooncascade.data.ForecastWeather
+import com.example.mooncascade.interfaces.BindableAdapter
 import kotlinx.android.synthetic.main.forecast_layout.view.*
-
 
 /**
  * @author Dmitry Tkachuk
  * Created on 21.10.2019
  * All rights reserved
  */
-class ForecastRecyclerView(private val forecastweather: ForecastWeather,
-                           private val context : MainActivity) :
-                                            RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>(){
+class ForecastRecyclerView(private val context : MainActivity) :
+                                            RecyclerView.Adapter<ForecastRecyclerView.ViewHolder>(),
+                                             BindableAdapter<ForecastWeather>{
+
+    lateinit var  forecastweather: ForecastWeather
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
@@ -28,30 +31,10 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         matchdayimg(forecastweather.forecast[position].mday.mphenomenon , holder)
         matchnightimg(forecastweather.forecast[position].mnight.mphenomenon , holder)
-
-        with(holder){
-            txttitle.apply{ text = forecastweather.forecast[position].mdate }
-            txttext.apply{ text = forecastweather.forecast[position].mday.mtext}
-            txtpeipsi.apply{ text = forecastweather.forecast[position].mday.mpeipsi ?:
-                                                              resources.getString(R.string.no_info)}
-            txttempmin.apply{text = String.format("%s......",
-                                                 forecastweather.forecast[position].mday.mtempmin)}
-            txttempmax.apply{ text = forecastweather.forecast[position].mday.mtempmax }
-            txtsea.apply { text = forecastweather.forecast[position].mday.msea ?:
-                                                              resources.getString(R.string.no_info)}
-            txtnighttext.apply{ text = forecastweather.forecast[position].mnight.mtext }
-            txtnighttempmin.apply{text = String.format("%s......",
-                                                forecastweather.forecast[position].mnight.mtempmin)}
-            txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
-            txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi ?:
-                                                            resources.getString(R.string.no_info) }
-            txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea ?:
-                                                           resources.getString(R.string.no_info) }
-            itemView.setOnClickListener {context.onItemforecastClicked(forecastweather,position) }
-        }
+        holder.bind(forecastweather,position , context)
     }
 
-        fun matchdayimg(phenomenon: String, holder: ViewHolder) {
+    private fun matchdayimg(phenomenon: String, holder: ViewHolder) {
             when (phenomenon) {
                 "Clear" -> {
                     holder.txtphenomenon.text = context.resources.getString(R.string.clear)
@@ -63,12 +46,10 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
                 }
                 "Variable clouds" -> {
                     holder.imgday.setImageResource(R.drawable.variable_clouds)
-                    holder.txtphenomenon.text =
-                        context.resources.getString(R.string.variable_clouds)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.variable_clouds)
                 }
                 "Cloudy with clear spells" -> {
-                    holder.txtphenomenon.text =
-                        context.resources.getString(R.string.cloudy_with_clear_spells)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.cloudy_with_clear_spells)
                     holder.imgday.setImageResource(R.drawable.variable_clouds)
                 }
                 "Cloudy" -> {
@@ -87,15 +68,13 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
                     holder.txtphenomenon.text = context.resources.getString(R.string.heavy_rain)
                     holder.imgday.setImageResource(R.drawable.moderate_rain)
                 }
-                "Light snow shower" -> {
+                "Light snowfall","Light snow shower" -> {
                     holder.imgday.setImageResource(R.drawable.light_snow_shower)
-                    holder.txtphenomenon.text =
-                        context.resources.getString(R.string.light_snow_shower)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.light_snow_shower)
                 }
-                "Moderate snow shower" -> {
+                "Moderate snowfall","Moderate snow shower" -> {
                     holder.imgday.setImageResource(R.drawable.moderate_snow)
-                    holder.txtphenomenon.text =
-                        context.resources.getString(R.string.moderate_snow_shower)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.moderate_snow_shower)
                 }
                 "Light shower" -> {
                     holder.imgday.setImageResource(R.drawable.light_shower)
@@ -103,8 +82,7 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
                 }
                 "Moderate shower" -> {
                     holder.imgday.setImageResource(R.drawable.light_shower)
-                    holder.txtphenomenon.text =
-                        context.resources.getString(R.string.moderate_shower)
+                    holder.txtphenomenon.text = context.resources.getString(R.string.moderate_shower)
                 }
                 "Heavy shower" -> {
                     holder.imgday.setImageResource(R.drawable.light_shower)
@@ -142,7 +120,7 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
             }
     }
 
-    fun matchnightimg(phenomenon : String , holder: ViewHolder){
+    private fun matchnightimg(phenomenon : String , holder: ViewHolder){
         when (phenomenon){
             "Clear" ->{
                 holder.imgnight.setImageResource(R.drawable.cloudy_moon)
@@ -190,11 +168,11 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
                 holder.imgnight.setImageResource(R.drawable.night_shower)
                 holder.txtnightphenomenon.text = context.resources.getString(R.string.heavy_shower)
             }
-            "Light snow shower" -> {
+            "Light snowfall", "Light snow shower" -> {
                 holder.imgnight.setImageResource(R.drawable.light_snow_shower)
                 holder.txtnightphenomenon.text = context.resources.getString(R.string.light_snow_shower)
             }
-            "Moderate snow shower" -> {
+            "Moderate snowfall","Moderate snow shower" -> {
                 holder.imgnight.setImageResource(R.drawable.moderate_snow)
                 holder.txtnightphenomenon.text = context.resources.getString(R.string.moderate_snow_shower)
             }
@@ -234,23 +212,40 @@ class ForecastRecyclerView(private val forecastweather: ForecastWeather,
         return forecastweather.forecast.size
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
-        val txttitle = view.txtdate
-        val txtphenomenon = view.txtphenomenon
-        val txttext = view.txttext
-        val txtpeipsi = view.txtpeipsi
-        val imgday = view.imgday
-        val txttempmin = view.txttempmin
-        val txttempmax = view.txttempmax
-        val txtsea = view.txtsea
-        val txtnightphenomenon = view.txtnightphenomenon
-        val txtnighttempmin = view.txtnighttempmin
-        val txtnighttempmax = view.txtnighttempmax
-        val imgnight = view.imgnight
-        val txtnightsea = view.txtnightsea
-        val txtnighttext = view.txtnighttext
-        val txtnightpeipsi = view.txtnightpeipsi
-
+    override fun setData(items: ForecastWeather) {
+      forecastweather = items
     }
 
+
+    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view){
+
+        fun bind(forecastweather: ForecastWeather,position: Int , context: MainActivity) {
+            with(itemView){
+                txtdate.text = forecastweather.forecast[position].mdate
+                txttext.text = forecastweather.forecast[position].mday.mtext
+                txtpeipsi.apply{text = forecastweather.forecast[position].mday.mpeipsi ?:
+                                                              resources.getString(R.string.no_info)}
+                txttempmin.apply{text = String.format("%s......",
+                                                 forecastweather.forecast[position].mday.mtempmin)}
+                txttempmax.apply{text = forecastweather.forecast[position].mday.mtempmax }
+                txtsea.apply{ text = forecastweather.forecast[position].mday.msea ?:
+                                                              resources.getString(R.string.no_info)}
+                txtnighttext.apply{text = forecastweather.forecast[position].mnight.mtext }
+                txtnighttempmin.apply{text = String.format("%s......",
+                    forecastweather.forecast[position].mnight.mtempmin)}
+                txtnighttempmax.apply { text = forecastweather.forecast[position].mnight.mtempmax }
+                txtnightpeipsi.apply { text = forecastweather.forecast[position].mnight.mpeipsi ?:
+                                                            resources.getString(R.string.no_info) }
+                txtnightsea.apply { text = forecastweather.forecast[position].mnight.msea ?:
+                                                             resources.getString(R.string.no_info) }
+                setOnClickListener {context.onItemforecastClicked(forecastweather,position)  }
+            }
+        }
+
+        val txtphenomenon = view.txtphenomenon
+        val imgday = view.imgday
+        val txtnightphenomenon = view.txtnightphenomenon
+        val imgnight = view.imgnight
+
+    }
 }

@@ -8,7 +8,6 @@ import com.example.mooncascade.di.component.DaggerAppComponent
 import com.example.mooncascade.di.modules.ContextModule
 import com.example.mooncascade.localizationsupport.LocaleManager
 import com.example.mooncascade.localizationsupport.LocaleManager.Companion.DEFAULT_LANGUAGE
-import javax.inject.Inject
 
 /**
  * @author Dmitry Tkachuk

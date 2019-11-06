@@ -25,6 +25,8 @@ import com.example.mooncascade.localizationsupport.LocaleManager.Companion.ESTON
 import com.example.mooncascade.localizationsupport.LocaleManager.Companion.RUSSIAN_LANGUAGE
 import com.example.mooncascade.localizationsupport.LocaleManager.Companion.UKRAINIAN_LANGUAGE
 import android.view.KeyEvent
+import androidx.databinding.DataBindingUtil
+import com.example.mooncascade.databinding.ActivityMainBinding
 
 /**
  * @author Dmitry Tkachuk
@@ -47,20 +49,24 @@ class MainActivity : AppCompatActivity(), OnItemsClickListener{
 
     private lateinit var forecast : Observable<ForecastWeather>
     private lateinit var appcomponent: AppComponent
+    private lateinit var  binding: ActivityMainBinding
 
     //Dagger assign and Presenter attach
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
         appcomponent = App.instance[this].getApplicationComponent()
         val activityComponent = DaggerMainActivityComponent.builder().
             appComponent(appcomponent)
             .build()
         activityComponent.injectMainActivity(this)
         mainPresenter.onAttach(this)
+        mainPresenter.setbinding(binding)
         if (mainPresenter.isInternetExist()){
             forecast = retrofitCall.getforecastweather()
             mainPresenter.loadDatafromInternet(forecast)
+
         }
         else if (!mainPresenter.isInternetExist() ){
             mainPresenter.loadDatafromCache()
@@ -98,7 +104,8 @@ class MainActivity : AppCompatActivity(), OnItemsClickListener{
         if (position == 0){
             forecast_recyclerview.visibility = View.INVISIBLE
             cities_recyclerview.layoutManager = LinearLayoutManager(this)
-            cities_recyclerview.adapter = CityRecyclerView(forecastweather,this)
+            cities_recyclerview.adapter = CityRecyclerView(this)
+            binding.forecast = forecastweather
             cities_recyclerview.visibility = View.VISIBLE
         }
     }
@@ -149,5 +156,7 @@ class MainActivity : AppCompatActivity(), OnItemsClickListener{
         recreate()
         return true
     }
+
+
 
 }

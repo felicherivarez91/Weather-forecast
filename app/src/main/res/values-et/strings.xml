@@ -29,5 +29,7 @@
     <string name="fog">Hammas</string>
     <string name="thunderstorm">Äike</string>
     <string name="thunder">Müristamine</string>
+    <string name="no_database">Kahjuks pole teil rakenduses ühtegi teavet salvestatud.
+        Proovige see hiljem käivitada, kui teil on Interneti-ühenduse loomise võimalus.</string>
 
 </resources>
