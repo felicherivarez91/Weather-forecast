@@ -27,6 +27,7 @@ class LocaleManager {
         return preferences.getString(SELECTED_LANGUAGE, defaultLanguage)
     }
 
+    //We save local language in order to properly handle activity recreation
     private fun persist(context: Context, language: String?) {
         val preferences = PreferenceManager.getDefaultSharedPreferences(context)
         val editor = preferences.edit()

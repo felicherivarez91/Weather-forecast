@@ -226,16 +226,16 @@ class CityRecyclerView(private val mcontext : MainActivity):
 
         fun bind(forecastweather: ForecastWeather,position: Int) {
             with(itemView){
-                txtcityname.apply { text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].
+                txtcityname.apply{text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].
                                                                                         mplacesname}
-                txtcitytempmin.apply {text = String.format("%s......",
+                txtcitytempmin.apply{text = String.format("%s......",
                             forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].mtempmin ?:
                                                              resources.getString(R.string.no_info))}
-                txttempmax.apply { text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].mtempmax}
-                txttempminnight.apply { text = String.format("%s......",
+                txttempmax.apply{text = forecastweather.forecast[CURRENT_DAY].mday.mplaces[position].mtempmax}
+                txttempminnight.apply{text = String.format("%s......",
                     forecastweather.forecast[CURRENT_DAY].mnight.mplaces[position].mtempmin ?:
                                                              resources.getString(R.string.no_info))}
-                txttempmaxnight.apply { text = forecastweather.forecast[CURRENT_DAY].mnight
+                txttempmaxnight.apply{text = forecastweather.forecast[CURRENT_DAY].mnight
                     .mplaces[position].mtempmax ?: resources.getString(R.string.no_info)}
             }
         }

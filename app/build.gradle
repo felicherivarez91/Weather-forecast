@@ -46,6 +46,7 @@ dependencies {
     kapt 'android.arch.persistence.room:compiler:2.1.0'
     kapt 'com.google.dagger:dagger-compiler:2.24'
     kapt 'androidx.room:room-compiler:2.2.1'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 
     annotationProcessor 'com.google.dagger:dagger-compiler:2.24'
     testImplementation 'junit:junit:4.12'

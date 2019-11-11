@@ -14,6 +14,7 @@ class ForecastTypeConverter {
 
     var gson = Gson()
 
+    //Converter needs to be used in order to properly work with custom classes in Room
     @TypeConverter
     fun stringToForecastList(data: String?): List<ForecastList> {
         if (data == null || data == "") {

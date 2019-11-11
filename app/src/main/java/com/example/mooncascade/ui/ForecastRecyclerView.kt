@@ -1,10 +1,8 @@
 package com.example.mooncascade.ui
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mooncascade.R
 import com.example.mooncascade.data.ForecastWeather

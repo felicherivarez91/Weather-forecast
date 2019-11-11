@@ -20,6 +20,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 
+//Use this to bind data to recyclerviews
 @BindingAdapter("data")
 fun <T> setRecyclerViewProperties(recyclerView: RecyclerView, items: T) {
     if (recyclerView.adapter is BindableAdapter<*>) {
@@ -32,7 +33,7 @@ class MainPresenter: BasePresenter<MainActivity> {
     private lateinit var mainView: MainActivity
     private var disposable : Disposable? = null
     @Volatile private var mweatherforecast : ForecastWeather? = null
-    var mbinding : ActivityMainBinding? = null
+    private var mbinding : ActivityMainBinding? = null
 
     override fun onAttach(view: MainActivity) {
         this.mainView = view
@@ -44,7 +45,8 @@ class MainPresenter: BasePresenter<MainActivity> {
     }
 
     //Load and save data from internet
-    override fun loadDatafromInternet(forecast: Observable<ForecastWeather>) {
+    override fun loadDatafromInternet(forecast: Observable<ForecastWeather>?) {
+        if (forecast != null)
         disposable = forecast
                      .subscribeOn(Schedulers.newThread())
                      .observeOn(Schedulers.io())

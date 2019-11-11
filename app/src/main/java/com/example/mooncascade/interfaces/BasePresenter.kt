@@ -14,7 +14,7 @@ interface BasePresenter<in T: Activity> {
 
     fun onAttach(view: T)
     fun isInternetExist() : Boolean
-    fun loadDatafromInternet(forecast : Observable<ForecastWeather>)
+    fun loadDatafromInternet(forecast : Observable<ForecastWeather>?)
     fun loadDatafromCache()
     fun onDetach()
     fun  setbinding(binding : ActivityMainBinding)
